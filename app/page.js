@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import {
   FaImages,
   FaSortAmountDown,
@@ -13,7 +13,8 @@ import ImageGrid from "./components/ImageGrid";
 import ImageModal from "./components/ImageModal";
 import ImageUpload from "./components/ImageUpload";
 
-export default function Home() {
+// Home component that uses useSearchParams
+function HomeContent() {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [nextCursor, setNextCursor] = useState("");
@@ -292,5 +293,25 @@ export default function Home() {
         />
       )}
     </div>
+  );
+}
+
+// Loading fallback component
+function HomeLoading() {
+  return (
+    <div className="container mx-auto px-4 py-6">
+      <div className="flex justify-center items-center h-40">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    </div>
+  );
+}
+
+// Main component with Suspense boundary
+export default function Home() {
+  return (
+    <Suspense fallback={<HomeLoading />}>
+      <HomeContent />
+    </Suspense>
   );
 }
