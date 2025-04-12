@@ -166,7 +166,7 @@ export default function Home() {
         <div className="mb-6 p-4 bg-gray-800 border border-gray-700 rounded-lg flex items-center justify-between">
           <p className="text-lg text-gray-200">
             Search results for:{" "}
-            <span className="font-semibold">"{searchQuery}"</span>
+            <span className="font-semibold">&ldquo;{searchQuery}&rdquo;</span>
             {totalCount > 0 && (
               <span className="ml-2 text-sm text-gray-400">
                 ({totalCount} results)
